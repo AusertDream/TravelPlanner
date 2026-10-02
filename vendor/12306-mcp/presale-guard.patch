@@ -1,0 +1,60 @@
+diff --git a/src/index.ts b/src/index.ts
+index bee40d1..98c4b41 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -1108,6 +1108,32 @@ registerTool(
+                 ],
+             };
+         }
++        // ── PATCHED (dsh-travel-planner) ────────────────────────────────
++        // 超出铁路 15 天预售期时 12306 返回空体，queryResponse.data 为 undefined，
++        // 原代码 `queryResponse.data.result` 会抛
++        // "Cannot read properties of undefined (reading 'result')"，
++        // 调用方（Agent）会误判为「12306 服务故障」并反复重试。
++        // 这里改成返回明确原因，不再抛异常。
++        if (queryResponse.data === null || queryResponse.data === undefined) {
++            const today = new Date();
++            today.setHours(0, 0, 0, 0);
++            const dep = new Date(`${date}T00:00:00`);
++            const days = Math.round(
++                (dep.getTime() - today.getTime()) / 86400000
++            );
++            const hint =
++                Number.isFinite(days) && days > 14
++                    ? `铁路车票预售期为 15 天（含今天），${date} 距今 ${days} 天，尚未开售；约在 ${new Date(
++                          dep.getTime() - 14 * 86400000
++                      )
++                          .toISOString()
++                          .slice(0, 10)} 开售。请改查预售期内的日期。`
++                    : '12306 未返回该查询的数据（可能尚未开售、日期超出范围，或该区间当日无车次）。';
++            return {
++                content: [{ type: 'text', text: `未查到车票数据。${hint}` }],
++            };
++        }
++        // ── /PATCHED ────────────────────────────────────────────────────
+         const ticketsData = parseTicketsData(queryResponse.data.result);
+         let ticketsInfo: TicketInfo[];
+         try {
+@@ -1355,12 +1381,20 @@ registerTool(
+                 };
+             }
+             // 请求成功，但查询有误
+-            if (typeof queryResponse.data == 'string') {
++            // PATCHED (dsh-travel-planner): 原判断只处理 data 为 string 的情况；
++            // 超出预售期时 data 会是 undefined，这里一并兜住，避免抛异常。
++            if (
++                typeof queryResponse.data == 'string' ||
++                queryResponse.data == null
++            ) {
+                 return {
+                     content: [
+                         {
+                             type: 'text',
+-                            text: `很抱歉，未查到相关的列车余票。(${queryResponse.errorMsg})`,
++                            text: `很抱歉，未查到相关的列车余票。(${
++                                queryResponse.errorMsg ??
++                                '该日期可能超出 15 天预售期，或该区间当日无可换乘方案'
++                            })`,
+                         },
+                     ],
+                 };

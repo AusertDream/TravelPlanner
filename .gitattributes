@@ -1,0 +1,5 @@
+# 统一 LF：.sh 在 Windows 上用 CRLF 会让 bash 报 $'\r': command not found
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ico binary

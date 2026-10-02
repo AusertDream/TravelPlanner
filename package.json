@@ -1,0 +1,55 @@
+{
+  "name": "dsh-travel-planner",
+  "version": "1.0.0",
+  "description": "旅行规划师：DeepSeek Harness (DSH) 的旅行规划 agent——实时查高铁/机票/酒店与真实路线，交付单文件 HTML 路书",
+  "type": "module",
+  "license": "MIT",
+  "author": "Tianyi Jiang (https://github.com/AusertDream)",
+  "homepage": "https://github.com/AusertDream/TravelPlanner#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AusertDream/TravelPlanner.git"
+  },
+  "bugs": "https://github.com/AusertDream/TravelPlanner/issues",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "agent-preset",
+    "agent-skills",
+    "travel",
+    "itinerary",
+    "12306",
+    "amap"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    "./travel-env": "./plugins/travel-env.mjs",
+    "./travel-finance": "./plugins/travel-finance.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "preset",
+    "plugins",
+    "assets",
+    "skills",
+    "vendor",
+    "scripts",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md"
+  ],
+  "scripts": {
+    "setup": "node scripts/install.mjs",
+    "doctor": "node assets/doctor.mjs",
+    "persona": "node scripts/build-persona.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./preset/cordis.patch.yml"
+    }
+  }
+}
