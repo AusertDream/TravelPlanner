@@ -24,7 +24,12 @@ function walk(dir, out = []) {
   }
   return out
 }
-const files = walk(ROOT)
+// 在 git 仓库里只查会被提交的文件（已跟踪 + 未被 .gitignore 忽略的新文件）；不是 git 仓库时退回全量扫描
+const gitList = spawnSync('git', ['-C', ROOT, 'ls-files', '-z', '--cached', '--others', '--exclude-standard'], { encoding: 'utf8' })
+const files =
+  gitList.status === 0
+    ? [...new Set(gitList.stdout.split('\0').filter(Boolean))].map((f) => path.join(ROOT, f)).filter((f) => fs.existsSync(f))
+    : walk(ROOT)
 const run = (cmd, args) => spawnSync(cmd, args, { encoding: 'utf8' })
 
 // 1. 语法

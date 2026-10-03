@@ -11,6 +11,7 @@ node ~/.dsh/preset-assets/travel-planner/doctor.mjs
 ```
 - 退出码 0：环境就绪，**不用跟用户提**，直接干活。只有「可选增强」没配（如 `GOOGLE_MAPS_API_KEY`）时，在交付时顺带一句「配了 Google Maps Key 地图会更好用，申请方法见 `.env.example`」即可，别为此打断规划。
 - 退出码 1（缺**必需** Key 或必需工具）：**先停下，别硬跑**。用两三句话告诉用户：缺哪个、它管什么、去哪申请（doctor 输出里有链接和步骤，照抄即可）、填到哪个文件（doctor 报告里「密钥文件」那一行的路径）。用户说填好了，就再跑一次 doctor 确认，然后调用 `env_reload`。`run.sh` 每次现读 `.env`，所以**不用重启 DSH**。
+- 缺的是**工具**（flyai / amap-gui / tuniu CLI、Pillow、12306 MCP）：把 doctor 给的安装命令告诉用户，**问一句要不要你来装**；用户同意再执行（`npm install -g …` 几十秒；12306 MCP 要从 GitHub 拉取编译，1–3 分钟，装完需要用户完全退出并重开 DSH）。没同意就别动。12306 没装好之前，火车票用 `flyai search-train` 顶上。
 - 用户坚持先不配：能做的照做（比如没飞猪 Key 时机票价格仍可信，**酒店价格会被遮蔽**），并在路书里明确标出哪些数据因此受限。
 - doctor 本身跑不起来（找不到文件）：说明工具没装好，请用户按项目 README 重新运行安装脚本。
 

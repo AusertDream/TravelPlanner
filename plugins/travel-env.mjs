@@ -18,12 +18,20 @@
  *   3. 注册 `env_status`（脱敏查看配置状态）与 `env_reload`（**热重载 .env**）两个工具：
  *      修改 .env 后调用 env_reload 即可生效，无需重启 DSH —— 对之后启动的子进程立即可见。
  *
+ * 另外负责「自举」：从插件市场装上时只有 bundle 本身，首次启动（或升级版本后）由本插件把
+ * 工具脚本与技能同步到 ~/.dsh 下（逻辑见 scripts/lib/sync.mjs）。config.bootstrap: false 可关闭。
+ *
  * 本插件是 AGENT-PLANE 本地插件：只注册工具、不发布服务，与其他工具行一样平放。
  */
 
 import { readFileSync, existsSync } from 'node:fs'
-import { join, isAbsolute } from 'node:path'
+import { join, isAbsolute, dirname, resolve } from 'node:path'
 import { homedir } from 'node:os'
+import { fileURLToPath } from 'node:url'
+import { bootstrap } from '../scripts/lib/sync.mjs'
+
+/** 本包根目录（插件市场装在 profile 的 node_modules 里，手动安装时是克隆下来的仓库）。 */
+const PKG_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 
 /** Cordis plugin name used by loader diagnostics. */
 export const name = 'travel-env'
@@ -106,6 +114,18 @@ export function apply(ctx, config) {
       else console[level === 'warn' ? 'warn' : 'log'](`[travel-env] ${message}`)
     } catch {
       // logging must never break activation
+    }
+  }
+
+  // 自举：从插件市场装上（只有 bundle 本身）或升级了版本时，把工具脚本和技能补到
+  // ~/.dsh/preset-assets/travel-planner/ 与 ~/.dsh/skills/。版本一致时直接跳过。
+  // 失败只记日志，绝不影响 DSH 启动。
+  if (config?.bootstrap !== false) {
+    try {
+      const msg = bootstrap({ root: PKG_ROOT })
+      if (msg) log('info', msg)
+    } catch (error) {
+      log('warn', `自动安装工具脚本/技能失败（可手动运行 node "${join(PKG_ROOT, 'scripts', 'install.mjs')}" --no-bundle）：${String((error && error.message) || error)}`)
     }
   }
 

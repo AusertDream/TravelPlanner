@@ -18,6 +18,10 @@ persona        人格与硬规矩，每轮都在上下文里                 pre
 
 安装后 profile 里是一个**链接**：`~/.dsh/profiles/desktop/node_modules/dsh-travel-planner → <仓库>`。所以 persona 和插件组合改仓库就是改 agent 本身；技能和工具脚本是**复制**过去的，改完要重跑安装脚本。
 
+从「添加插件」/ 插件市场装时只有 bundle 本身，工具脚本和技能靠**自举**补齐：`travel-env` 插件启动时比对 `~/.dsh/preset-assets/travel-planner/.install.json` 里的版本和 `package.json` 的版本，不一致就同步（逻辑在 `scripts/lib/sync.mjs`，和安装脚本共用）。所以**发版一定要改 `version`**，否则已装用户重开 DSH 也拿不到新的工具脚本和技能。
+
+12306 MCP 那一行带 `disabled: !!js …existsSync(dshHomePath('tools', '12306-mcp', …))`：没编译好就自动停用，免得一个 MCP 起不来拖垮整个 DSH 的启动。
+
 ## 2. 改了之后怎么生效
 
 | 改了什么 | 怎么生效 |
@@ -181,6 +185,6 @@ Start-Process '<DSH 安装目录>\DeepSeek Harness.exe' -ArgumentList '--remote-
 
 ## 7. 发版
 
-1. 改 `package.json` 的 `version`。
+1. 改 `package.json` 的 `version`（自举靠它判断要不要同步，别忘）。
 2. `node scripts/check.mjs` 全绿。
 3. 用户侧升级就是 `git pull && node scripts/install.mjs`，然后重启 DSH。

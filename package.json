@@ -13,16 +13,19 @@
   "bugs": "https://github.com/AusertDream/TravelPlanner/issues",
   "keywords": [
     "dsh",
+    "dsh-plugin",
     "deepseek-harness",
     "agent-preset",
     "agent-skills",
     "travel",
     "itinerary",
+    "trip-planner",
     "12306",
     "amap"
   ],
   "engines": {
-    "node": ">=22"
+    "node": ">=22",
+    "dsh": ">=0.2.0-rc.2"
   },
   "exports": {
     "./travel-env": "./plugins/travel-env.mjs",
@@ -38,6 +41,7 @@
     "scripts",
     "docs",
     "README.md",
+    "README.en.md",
     "LICENSE",
     "NOTICE.md"
   ],

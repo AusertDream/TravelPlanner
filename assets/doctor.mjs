@@ -227,6 +227,12 @@ for (const [cmd, pkg, level, why] of [
   })
 }
 
+// 安装记录（安装脚本或插件自举写的）：用来给出「补装」的准确命令
+try {
+  report.install = JSON.parse(readFileSync(join(dirname(ENV_FILE), '.install.json'), 'utf8'))
+} catch {}
+const installer = report.install?.repo ? `node "${report.install.repo}/scripts/install.mjs"` : 'node scripts/install.mjs（在项目仓库目录里）'
+
 const mcp = join(DSH_HOME, 'tools', '12306-mcp', 'build', 'index.js')
 const mcpOk = existsSync(mcp)
 const mcpPatched = mcpOk && readFileSync(mcp, 'utf8').includes('dsh-travel-planner')
@@ -235,15 +241,11 @@ report.tools.push({
   level: 'recommended',
   status: mcpOk ? 'ok' : 'missing',
   detail: mcpOk ? (mcpPatched ? '已编译（含预售期补丁）' : '已编译，但没有预售期补丁') : `没找到 ${mcp}`,
-  fix: '重新运行项目里的安装脚本：node scripts/install.mjs（会拉取并编译 12306 MCP）',
+  fix: `${installer} --no-bundle（从 GitHub 拉取并编译，约 1–3 分钟；需要 git 和 npm），装完完全退出并重开 DSH。没装之前查火车票用 flyai search-train`,
 })
 
 for (const t of report.tools) if (t.status !== 'ok' && t.level === 'required') report.ok = false
 
-// 安装信息（安装脚本写的），用来给出"重新安装"的准确命令
-try {
-  report.install = JSON.parse(readFileSync(join(dirname(ENV_FILE), '.install.json'), 'utf8'))
-} catch {}
 
 // ── 输出 ────────────────────────────────────────────────────────────
 if (asJson) {

@@ -15,9 +15,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
-import crypto from 'node:crypto'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
+import { KEEP, makeTrash, syncAssets, syncSkills, writeInstallRecord } from './lib/sync.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const PKG = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'))
@@ -28,10 +28,6 @@ const DSH_HOME = process.env.DSH_HOME?.trim() || path.join(os.homedir(), '.dsh')
 const ASSETS_DST = path.join(DSH_HOME, 'preset-assets', 'travel-planner')
 const MCP_DST = path.join(DSH_HOME, 'tools', '12306-mcp')
 const MCP_REPO = 'https://github.com/Joooook/12306-mcp.git'
-const STAMP = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
-const TRASH = path.join(DSH_HOME, '_trash', `travel-planner-${STAMP}`)
-// 不随安装覆盖/挪走的东西（用户数据）
-const KEEP = new Set(['.env', '.mapcache', '.install.json', '__pycache__'])
 
 // ── 参数 ────────────────────────────────────────────────────────────
 const HELP = `用法：node scripts/install.mjs [选项]
@@ -128,41 +124,14 @@ function exec(cmd, args, { cwd, inherit = true, timeout } = {}) {
   return { ok: r.status === 0, status: r.status, out: `${r.stdout || ''}${r.stderr || ''}`, error: r.error }
 }
 
-function hashTree(p) {
-  const h = crypto.createHash('sha1')
-  const walk = (d, rel) => {
-    for (const name of fs.readdirSync(d).sort()) {
-      if (KEEP.has(name)) continue
-      const full = path.join(d, name)
-      const st = fs.statSync(full)
-      if (st.isDirectory()) walk(full, `${rel}${name}/`)
-      else h.update(`${rel}${name}\0`).update(fs.readFileSync(full)).update('\0')
-    }
-  }
-  if (fs.statSync(p).isDirectory()) walk(p, '')
-  else h.update(fs.readFileSync(p))
-  return h.digest('hex')
-}
-
-/** 把旧东西挪进本次的 _trash 目录（同盘 rename；跨盘时复制后再删原件）。 */
-function toTrash(p, sub) {
-  const dst = path.join(TRASH, sub, path.basename(p))
-  if (opt.dryRun) return dst
-  fs.mkdirSync(path.dirname(dst), { recursive: true })
-  try {
-    fs.renameSync(p, dst)
-  } catch {
-    fs.cpSync(p, dst, { recursive: true })
-    fs.rmSync(p, { recursive: true, force: true })
-  }
-  return dst
-}
+const trash = makeTrash(DSH_HOME, { dryRun: opt.dryRun })
+const TRASH = trash.dir
+const toTrash = (p, sub) => trash.move(p, sub)
 
 function copyFile(src, dst) {
   if (opt.dryRun) return
   fs.mkdirSync(path.dirname(dst), { recursive: true })
   fs.copyFileSync(src, dst)
-  if (!IS_WIN && /\.(sh|mjs|py)$/.test(dst)) fs.chmodSync(dst, 0o755)
 }
 
 function readJson(p) {
@@ -175,33 +144,12 @@ function writeJson(p, data) {
 // ── 1. 工具脚本 ─────────────────────────────────────────────────────
 function installAssets() {
   step(1, `工具脚本 → ${ASSETS_DST}`)
-  const src = path.join(ROOT, 'assets')
-  let added = 0, updated = 0, same = 0
-  for (const name of fs.readdirSync(src)) {
-    if (KEEP.has(name)) continue
-    const s = path.join(src, name)
-    if (fs.statSync(s).isDirectory()) continue
-    const d = path.join(ASSETS_DST, name)
-    if (fs.existsSync(d)) {
-      if (hashTree(d) === hashTree(s)) {
-        same++
-        continue
-      }
-      toTrash(d, 'assets')
-      updated++
-    } else added++
-    copyFile(s, d)
-  }
-  log(`  新增 ${added}，更新 ${updated}，未变 ${same}${updated ? `（旧版本${opt.dryRun ? '将' : '已'}挪到 ${path.join(TRASH, 'assets')}）` : ''}`)
-
-  const env = path.join(ASSETS_DST, '.env')
-  if (fs.existsSync(env)) log('  .env 已存在，保持不动')
-  else {
-    copyFile(path.join(src, '.env.example'), env)
-    log(`  ${opt.dryRun ? '将' : '已'}从模板生成 .env：${env}`)
-  }
+  const r = syncAssets({ root: ROOT, dest: ASSETS_DST, trash, dryRun: opt.dryRun })
+  const will = opt.dryRun ? '将' : '已'
+  log(`  新增 ${r.added}，更新 ${r.updated}，未变 ${r.same}${r.updated ? `（旧版本${will}挪到 ${path.join(TRASH, 'assets')}）` : ''}`)
+  log(r.envCreated ? `  ${will}从模板生成 .env：${r.envPath}` : '  .env 已存在，保持不动')
   if (!opt.dryRun) {
-    writeJson(path.join(ASSETS_DST, '.install.json'), {
+    writeInstallRecord(ASSETS_DST, {
       name: BUNDLE,
       version: PKG.version,
       repo: fwd(ROOT),
@@ -215,24 +163,9 @@ function installAssets() {
 // ── 2. 技能 ─────────────────────────────────────────────────────────
 function installSkills() {
   step(2, '技能')
-  const src = path.join(ROOT, 'skills')
-  const names = fs.readdirSync(src).filter((n) => fs.existsSync(path.join(src, n, 'SKILL.md')))
   for (const dir of opt.skillsDirs) {
-    let added = 0, updated = 0, same = 0
-    for (const n of names) {
-      const s = path.join(src, n)
-      const d = path.join(dir, n)
-      if (fs.existsSync(d)) {
-        if (hashTree(d) === hashTree(s)) {
-          same++
-          continue
-        }
-        toTrash(d, `skills-${path.basename(path.dirname(dir))}`)
-        updated++
-      } else added++
-      if (!opt.dryRun) fs.cpSync(s, d, { recursive: true })
-    }
-    log(`  ${dir}：${names.length} 个技能，新增 ${added}，更新 ${updated}，未变 ${same}`)
+    const r = syncSkills({ root: ROOT, dest: dir, trash, dryRun: opt.dryRun })
+    log(`  ${dir}：${r.names.length} 个技能，新增 ${r.added}，更新 ${r.updated}，未变 ${r.same}`)
 
     // 途牛官方技能：原样随 tuniu-cli 的 npm 包发布，不在本仓库里重复分发，装了 CLI 就顺手复制过来
     const tuniuDst = path.join(dir, 'tuniu-cli', 'SKILL.md')
@@ -468,4 +401,4 @@ if (registered) {
 }
 todo.forEach((t, i) => log(`${i + 1}. ${t}`))
 if (warnings) log(`\n有 ${warnings} 条警告，见上方 ⚠️。`)
-if (fs.existsSync(TRASH)) log(`被替换的旧文件在：${TRASH}`)
+if (trash.used) log(`被替换的旧文件在：${TRASH}`)
