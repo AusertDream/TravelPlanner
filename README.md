@@ -61,7 +61,7 @@
   </tr>
 </table>
 
-完整示例：[`examples/成都3天2晚路书.html`](examples/成都3天2晚路书.html)（下载后用浏览器打开）。
+完整示例：[👉 在线看成都 3 天 2 晚路书](https://ausertdream.github.io/TravelPlanner/examples/%E6%88%90%E9%83%BD3%E5%A4%A92%E6%99%9A%E8%B7%AF%E4%B9%A6.html)（手机也能开，在线版地图是静态图）。源文件在 [`examples/成都3天2晚路书.html`](examples/成都3天2晚路书.html)，下载下来离线也能看。
 
 ## 🧭 它是怎么规划的
 

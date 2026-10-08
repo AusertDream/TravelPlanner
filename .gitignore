@@ -5,6 +5,7 @@
 
 # ── 运行产物 ──
 .mapcache/
+_site/
 .install.json
 _tmp/
 *.check.png

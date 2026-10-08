@@ -66,6 +66,8 @@ FLYAI_API_KEY=粘贴飞猪的 API Key
 
 某份路书不想带 Key（比如要公开发出去）：让 agent 生成地图时加 `--no-google-key`。
 
+GitHub Pages 上的在线示例只放静态地图，不用 Key。
+
 Key 填错时，地图会显示「Google key 无效，请检查 .env 里的 GOOGLE_MAPS_API_KEY」并自动换成高德底图。
 
 ## 4. Unsplash `UNSPLASH_ACCESS_KEY`（可选）

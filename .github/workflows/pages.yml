@@ -1,0 +1,41 @@
+name: pages
+
+# 把 examples/ 里的示例路书发布到 GitHub Pages：https://<用户名>.github.io/TravelPlanner/
+# 首次使用：仓库 Settings → Pages → Source 选「GitHub Actions」。
+# 在线版只放静态地图（scripts/build-pages.mjs 会去掉交互地图），不需要任何 Key。
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'examples/**'
+      - 'docs/images/banner.svg'
+      - 'scripts/build-pages.mjs'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/build-pages.mjs --out _site
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

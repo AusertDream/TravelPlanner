@@ -51,7 +51,7 @@ Tell it "3 days in Chengdu from Shanghai over the National Day holiday, 2 people
   </tr>
 </table>
 
-Full example: [`examples/成都3天2晚路书.html`](examples/成都3天2晚路书.html) (download and open in a browser).
+Full example: [👉 open the Chengdu 3-day itinerary online](https://ausertdream.github.io/TravelPlanner/examples/%E6%88%90%E9%83%BD3%E5%A4%A92%E6%99%9A%E8%B7%AF%E4%B9%A6.html) (works on phones; the online copy uses static maps). The source file is [`examples/成都3天2晚路书.html`](examples/成都3天2晚路书.html); download it to view offline.
 
 ## Quick start
 

@@ -188,3 +188,4 @@ Start-Process '<DSH 安装目录>\DeepSeek Harness.exe' -ArgumentList '--remote-
 1. 改 `package.json` 的 `version`（自举靠它判断要不要同步，别忘）。
 2. `node scripts/check.mjs` 全绿。
 3. 用户侧升级就是 `git pull && node scripts/install.mjs`，然后重启 DSH。
+4. `examples/` 里的示例路书由 `pages` 工作流发布到 GitHub Pages，推到 main 后自动更新（首次要在 Settings → Pages 把 Source 设成「GitHub Actions」）。在线版只放静态地图（交互地图在构建时去掉）。本地预览：`node scripts/build-pages.mjs`，打开 `_site/index.html`。
