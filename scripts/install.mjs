@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ──────────────────────────────────────────────────────────────────────
-//  旅行规划师 — 安装 / 升级 / 卸载
+//  旅行规划助手 — 安装 / 升级 / 卸载
 //
 //    node scripts/install.mjs                 完整安装到 DSH（重复运行 = 升级）
 //    node scripts/install.mjs --skills-only   只装技能 + 工具脚本（给其他 agent 用）
@@ -32,7 +32,7 @@ const MCP_REPO = 'https://github.com/Joooook/12306-mcp.git'
 // ── 参数 ────────────────────────────────────────────────────────────
 const HELP = `用法：node scripts/install.mjs [选项]
 
-默认：完整安装旅行规划师到 DSH（重复运行即升级）
+默认：完整安装旅行规划助手到 DSH（重复运行即升级）
   1. 工具脚本 assets/ → ${ASSETS_DST}
      （首次安装会从 .env.example 生成 .env；已有的 .env 不动）
   2. 技能 skills/ → ${path.join(DSH_HOME, 'skills')}
@@ -334,7 +334,7 @@ function registerBundle() {
 
 // ── 卸载 ────────────────────────────────────────────────────────────
 function uninstall() {
-  log(`卸载旅行规划师${opt.dryRun ? '（演练，不改文件）' : ''}`)
+  log(`卸载旅行规划助手${opt.dryRun ? '（演练，不改文件）' : ''}`)
   const { name, dir } = profileDir()
   if (!opt.noBundle && dir && fs.existsSync(path.join(dir, 'package.json'))) {
     const before = readJson(path.join(dir, 'package.json'))
@@ -372,7 +372,7 @@ if (opt.uninstall) {
   process.exit(0)
 }
 
-log(`旅行规划师 ${PKG.version} 安装${opt.skillsOnly ? '（仅技能 + 工具脚本）' : ''}${opt.dryRun ? '（演练，不改文件）' : ''}`)
+log(`旅行规划助手 ${PKG.version} 安装${opt.skillsOnly ? '（仅技能 + 工具脚本）' : ''}${opt.dryRun ? '（演练，不改文件）' : ''}`)
 log(`  仓库：${ROOT}`)
 log(`  DSH 目录：${DSH_HOME}`)
 
@@ -394,7 +394,7 @@ const todo = []
 if (!doctorOk && !opt.dryRun) todo.push(`按上面自检报告把缺的 Key 填进 ${path.join(ASSETS_DST, '.env')}（填完运行 node "${path.join(ASSETS_DST, 'doctor.mjs')}" 复查）`)
 if (registered) {
   todo.push('完全退出 DSH 再打开（桌面版：托盘图标右键退出；只关窗口不算）')
-  todo.push('新建会话，模式选「旅行规划师」，说一句「帮我规划国庆去成都 3 天，从上海出发，2 个人，预算 5000」试试')
+  todo.push('新建会话，模式选「旅行规划助手」，说一句「帮我规划国庆去成都 3 天，从上海出发，2 个人，预算 5000」试试')
 } else if (opt.skillsOnly) {
   todo.push(`技能已装到：${opt.skillsDirs.join('、')}`)
   todo.push('在你的 agent 里说「用 travel-planning 技能帮我规划一次旅行」即可；train-booking 技能需要另外接入 12306 MCP（见 docs/INSTALL.md）')

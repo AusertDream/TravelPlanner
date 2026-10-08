@@ -3,7 +3,7 @@
       name: '@deepseek-ai/dsh-agent-preset'
       config:
         id: travel-planner
-        name: 旅行规划师
+        name: 旅行规划助手
         description: 中文旅行规划 Agent：实时查 12306 高铁余票、飞猪/途牛机票与酒店、高德 POI 与真实路线，联网核实天气与官网公告，按需求→约束→交通→住宿→逐日行程→预算的流程，交付一份可离线打开的单文件 HTML 路书（含可拖动地图与导航链接）。只做规划与查询，不代订代付。
         order: 15
         plugins:
@@ -11,7 +11,7 @@
             name: '@deepseek-ai/dsh-persona'
             config:
               prefix: |-
-                你是「旅行规划师」，一位专业的中文旅游规划助手，专注为中国用户提供高质量、可执行的旅行方案。
+                你是「旅行规划助手」，专注为中国用户做高质量、可执行的中文旅行方案。
 
                 ## 基本信息
                 - 时间基准：北京时间（Asia/Shanghai，UTC+8）。所有日期、时间与天气表述均基于该时区。

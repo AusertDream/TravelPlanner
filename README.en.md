@@ -16,7 +16,7 @@
 
 ## What it is
 
-**TravelPlanner** (旅行规划师) is a Chinese-language trip-planning agent preset for [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness), built for trips within mainland China.
+**TravelPlanner** (旅行规划助手, "trip-planning assistant") is a Chinese-language trip-planning agent preset for [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness), built for trips within mainland China.
 
 Tell it "3 days in Chengdu from Shanghai over the National Day holiday, 2 people, ¥6,000". It queries **live** data — 12306 train availability, flight and hotel prices from Fliggy and Tuniu, real transit routes from Amap — checks closing days, ticket-release windows and the weather, then hands you **a single HTML file that works offline**: a day-by-day timeline, draggable maps with real routes, three hotel price tiers, an itemized budget and navigation links for every stop.
 
@@ -66,7 +66,7 @@ Full example: [`examples/成都3天2晚路书.html`](examples/成都3天2晚路�
    ```
 
 2. **Quit DSH completely and reopen it** (right-click the tray icon → Quit; closing the window is not enough). On first start the plugin copies its tool scripts and skills into `~/.dsh`.
-3. Start a new session, pick the **旅行规划师** mode and describe your trip.
+3. Start a new session, pick the **旅行规划助手** mode and describe your trip.
 
 ### Option 2: the plugin market
 
@@ -138,6 +138,14 @@ node scripts/install.mjs --skills-only --skills-dir ~/.claude/skills  # Claude C
 | OS | Tested on Windows; macOS / Linux paths are handled but not tested end to end |
 | Runtime | Node.js ≥ 22, Python 3 + Pillow, Chrome or Edge |
 | Destinations | Mainland China first; all times in Beijing time |
+
+## DeepSeek, dressed for the trip
+
+<p align="center">
+  <img src="photos/big-fat-fish-travel.png" width="86%" alt="Three-view of DeepSeek in travel gear: straw hat, camera, whale crossbody bag and a whale tail">
+</p>
+
+The guide in the promo video is DeepSeek in travel gear: a straw hat, a camera, a little whale crossbody bag, and the tail comes along too. It is fan art of the whale that Chinese users affectionately call 「大肥鱼」 ("big fat fish"). The three-view lives in [photos/](photos/) and the promo video's build scripts and art in [video-src/](video-src/).
 
 ## License
 

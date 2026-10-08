@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/images/banner.svg" width="100%" alt="TravelPlanner 旅行规划师：一句话需求，交付一份能离线打开的旅行路书">
+  <img src="docs/images/banner.svg" width="100%" alt="TravelPlanner 旅行规划助手：一句话需求，交付一份能离线打开的旅行路书">
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@
 
 ## 一句话需求，交付一份能用的路书
 
-**旅行规划师**是 [DeepSeek Harness（DSH）](https://github.com/deepseek-ai/deepseek-harness) 里的一个中文旅行规划 agent。
+**旅行规划助手**是跑在 [DeepSeek Harness（DSH）](https://github.com/deepseek-ai/deepseek-harness) 里的中文旅行规划 agent，帮你把一趟旅行从头到尾排明白。
 
 你说「国庆从上海去成都玩 3 天，2 个人，预算 6000」。它会**当场查** 12306 余票、飞猪 / 途牛的机票和酒店价、高德的真实路线，核实闭馆日、预约放票和天气，最后交给你**一个能离线打开的 HTML 文件**：逐日时间轴、可拖动地图、三档酒店、分项预算、每一站的导航链接都在里面，转发给同行的人直接就能看。
 
@@ -39,7 +39,7 @@
 
 ## 🆚 和「问一句 AI 给个攻略」有什么不同
 
-| | 普通对话 | 旅行规划师 |
+| | 普通对话 | 旅行规划助手 |
 |---|---|---|
 | **车次、票价、房价** | 凭记忆，常常过时或编造 | 当场查 12306 / 飞猪 / 途牛，标注来源和查询日期 |
 | **市内怎么走** | 「坐地铁大概 30 分钟」 | 高德真实路线：几号线换几号线、几分钟、票价几块 |
@@ -93,7 +93,7 @@ flowchart LR
    ```
 
 2. **完全退出 DSH 再打开**（托盘图标右键退出；只关窗口不算）。第一次启动时，插件会自动把工具脚本和技能装到 `~/.dsh` 下。
-3. 新建会话，模式选「**旅行规划师**」，说一句需求。
+3. 新建会话，模式选「**旅行规划助手**」，说一句你想去哪玩。
 
 > 桌面版的插件目前不能自动更新：升级时先在插件管理里卸载，再按上面的步骤装新版。
 
@@ -154,7 +154,7 @@ node scripts/install.mjs --skills-only --skills-dir ~/.claude/skills  # Claude C
 
 ## 💬 怎么用
 
-在「旅行规划师」模式里正常说话就行：
+在「旅行规划助手」模式里像跟朋友聊天一样说就行：
 
 - 「十一从杭州去西安 4 天，两个大人一个 6 岁小孩，预算一万，想看兵马俑」
 - 「帮我看看这份行程有没有问题」+ 贴上行程文字或截图
@@ -202,7 +202,7 @@ node scripts/install.mjs --skills-only --skills-dir ~/.claude/skills  # Claude C
 </details>
 
 <details>
-<summary><b>模式列表里没有「旅行规划师」？</b></summary>
+<summary><b>模式列表里没有「旅行规划助手」？</b></summary>
 
 多半是没有完全退出 DSH：桌面版要在托盘图标上右键「退出」，再重新打开。更多排障见 [docs/INSTALL.md](docs/INSTALL.md#排障)。
 </details>
@@ -245,11 +245,21 @@ TravelPlanner/
 ├── vendor/12306-mcp/     12306 MCP 的上游版本号 + 预售期补丁
 ├── scripts/              install.mjs（安装 / 升级 / 卸载）、build-persona.mjs、check.mjs、lib/sync.mjs
 ├── examples/             示例路书
+├── photos/               角色三视图
+├── video-src/            宣传片构建源码与角色、背景图（成片在 video/，不入库）
 └── docs/                 INSTALL · KEYS · DEVELOPMENT
 ```
 
 改 agent、跑端到端测试、踩过的坑：见 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)。
 </details>
+
+## 🐳 换上旅行装的 DeepSeek
+
+<p align="center">
+  <img src="photos/big-fat-fish-travel.png" width="86%" alt="旅行装 DeepSeek 三视图：草帽、相机、鲸鱼斜挎包和鲸尾巴">
+</p>
+
+宣传片里带你出门的，是换上旅行装的 DeepSeek：草帽、胸前的相机、鲸鱼斜挎包，鲸尾巴也一起带上了。形象是大家口中「大肥鱼」的二创，三视图在 [photos/](photos/)，宣传片的构建源码和素材在 [video-src/](video-src/)。
 
 ## 📄 许可证与致谢
 

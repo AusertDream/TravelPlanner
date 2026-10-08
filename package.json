@@ -1,7 +1,7 @@
 {
   "name": "dsh-travel-planner",
   "version": "1.0.0",
-  "description": "旅行规划师：DeepSeek Harness (DSH) 的旅行规划 agent——实时查高铁/机票/酒店与真实路线，交付单文件 HTML 路书",
+  "description": "旅行规划助手：DeepSeek Harness (DSH) 的旅行规划 agent——实时查高铁/机票/酒店与真实路线，交付单文件 HTML 路书",
   "type": "module",
   "license": "MIT",
   "author": "Tianyi Jiang (https://github.com/AusertDream)",

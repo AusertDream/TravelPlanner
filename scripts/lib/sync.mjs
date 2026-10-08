@@ -166,7 +166,7 @@ export function bootstrap({ root }) {
     const parts = [`工具脚本 +${a.added}/~${a.updated}`, `技能 +${s.added}/~${s.updated}`]
     if (a.envCreated) parts.push(`已生成 ${a.envPath}，请填 Key`)
     if (trash.used) parts.push(`旧文件在 ${trash.dir}`)
-    return `旅行规划师 ${pkg.version} 已自动安装：${parts.join('；')}`
+    return `旅行规划助手 ${pkg.version} 已自动安装：${parts.join('；')}`
   } finally {
     fs.rmSync(lock, { force: true })
   }

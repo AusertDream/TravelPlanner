@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ──────────────────────────────────────────────────────────────────────
-//  旅行规划师 — 环境自检（doctor.mjs）
+//  旅行规划助手 — 环境自检（doctor.mjs）
 //
 //  查三样东西，缺了就告诉你去哪弄：
 //    1. 密钥：.env 里的必需 Key 有没有填、是不是还是占位值、格式像不像
@@ -261,11 +261,11 @@ const enhance = report.keys.filter((k) => k.level === 'enhance' && k.status !== 
 const warns = report.keys.flatMap((k) => k.warnings)
 
 if (quiet && report.ok && missRec.length === 0 && warns.length === 0) {
-  console.log(`✅ 旅行规划师环境就绪${enhance.length ? '（可选：配 GOOGLE_MAPS_API_KEY 后地图更好用）' : ''}`)
+  console.log(`✅ 旅行规划助手环境就绪${enhance.length ? '（可选：配 GOOGLE_MAPS_API_KEY 后地图更好用）' : ''}`)
   process.exit(0)
 }
 
-L.push('旅行规划师 · 环境自检')
+L.push('旅行规划助手 · 环境自检')
 L.push(`密钥文件：${ENV_FILE}${report.envExists ? '' : '（不存在！先复制同目录的 .env.example 为 .env 再填）'}`)
 L.push('')
 L.push('【密钥】')
