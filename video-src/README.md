@@ -2,6 +2,8 @@
 
 成片就是用这些脚本做出来的，留着方便以后改词、改画面后重新渲染。用到的素材（角色图、背景图、走路动画帧）在 `art/`。
 
+成片已发布在 B 站：<https://www.bilibili.com/video/BV135HD6HE9W>。README 里的预览图 `docs/images/video-preview.webp` 是成片开头 24 秒转的无声动图（640 宽、12 fps）。
+
 成片、封面、字幕和发布文案放在仓库根目录的 `video/`，不入库（成片 170 MB，音视频文件都不进 git）。
 
 | 文件 | 作用 |

@@ -11,11 +11,13 @@
   <a href="./package.json"><img src="https://img.shields.io/badge/DSH-%E2%89%A5%200.2.0--rc.2-5B4CF0?style=flat-square" alt="DSH ≥ 0.2.0-rc.2"></a>
   <img src="https://img.shields.io/badge/Node.js-%E2%89%A5%2022-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js ≥ 22">
   <a href="https://github.com/AusertDream/TravelPlanner/actions/workflows/check.yml"><img src="https://github.com/AusertDream/TravelPlanner/actions/workflows/check.yml/badge.svg" alt="check"></a>
+  <a href="https://www.bilibili.com/video/BV135HD6HE9W"><img src="https://img.shields.io/badge/bilibili-%E5%AE%A3%E4%BC%A0%E7%89%87-FB7299?style=flat-square&logo=bilibili&logoColor=white" alt="B 站宣传片"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-0B7285?style=flat-square" alt="MIT"></a>
   <a href="https://github.com/AusertDream/TravelPlanner/stargazers"><img src="https://img.shields.io/github/stars/AusertDream/TravelPlanner?style=flat-square&color=f39c12" alt="GitHub stars"></a>
 </p>
 
 <p align="center">
+  <a href="#-宣传片">宣传片</a> ·
   <a href="#-快速开始">快速开始</a> ·
   <a href="#️-效果预览">效果预览</a> ·
   <a href="#-需要哪些-key">需要哪些 Key</a> ·
@@ -33,9 +35,13 @@
 > [!IMPORTANT]
 > 它只做规划和查询，**绝不代订、代付**。所有价格都是查询时的参考价，预订由你自己在官方渠道完成。
 
+## 🎬 宣传片
+
 <p align="center">
-  <img src="docs/images/map.jpg" width="88%" alt="路书里的地图：高德底图、真实地铁路线、编号站点与每站导航链接">
+  <a href="https://www.bilibili.com/video/BV135HD6HE9W" title="去 B 站看完整宣传片"><img src="docs/images/video-preview.webp" width="88%" alt="宣传片开头 24 秒：机票高铁同时比价、挑三档酒店、画出地铁换乘路线、核对闭馆放票，然后 DeepSeek 换上旅行装出场"></a>
 </p>
+
+<p align="center">上面是开头 24 秒的无声预览，<a href="https://www.bilibili.com/video/BV135HD6HE9W"><b>▶ 点这里去 B 站看完整版</b></a>（3 分钟，有配音和字幕）</p>
 
 ## 🆚 和「问一句 AI 给个攻略」有什么不同
 
@@ -51,6 +57,9 @@
 ## 🖼️ 效果预览
 
 <table>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/images/map.jpg" alt="路书里的地图：高德底图、真实地铁路线、编号站点与每站导航链接"><br><sub><b>地图</b>：高德真实路线，几号线换几号线、多少分钟、票价几块，每一站都能一键导航</sub></td>
+  </tr>
   <tr>
     <td width="50%" align="center"><img src="docs/images/hero.png" alt="路书首屏"><br><sub><b>首屏</b>：这趟为什么这么排，一段话讲清取舍</sub></td>
     <td width="50%" align="center"><img src="docs/images/day.jpg" alt="逐日时间轴"><br><sub><b>逐日时间轴</b>：几点到哪、怎么去、花多少，附 Plan B</sub></td>
@@ -99,7 +108,7 @@ flowchart LR
 
 ### 方式二：插件市场
 
-收录进 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) 精选列表后，就能在 [dsh-market](https://github.com/dsh-market/dsh-market) 插件市场（设置 → 插件市场）里搜「TravelPlanner」一键安装，装完同样要完全退出并重开 DSH。
+已经提交到 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) 精选列表，正在审核（[#6450](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/6450)）。收录之后，就能在 [dsh-market](https://github.com/dsh-market/dsh-market) 插件市场（设置 → 插件市场）里搜「TravelPlanner」一键安装，装完同样要完全退出并重开 DSH。审核通过之前，用方式一粘贴仓库地址装，效果一样。
 
 ### 方式三：克隆仓库 + 安装脚本（一次装齐）
 
@@ -259,7 +268,7 @@ TravelPlanner/
   <img src="photos/big-fat-fish-travel.png" width="86%" alt="旅行装 DeepSeek 三视图：草帽、相机、鲸鱼斜挎包和鲸尾巴">
 </p>
 
-宣传片里带你出门的，是换上旅行装的 DeepSeek：草帽、胸前的相机、鲸鱼斜挎包，鲸尾巴也一起带上了。形象是大家口中「大肥鱼」的二创，三视图在 [photos/](photos/)，宣传片的构建源码和素材在 [video-src/](video-src/)。
+[宣传片](https://www.bilibili.com/video/BV135HD6HE9W)里带你出门的，是换上旅行装的 DeepSeek：草帽、胸前的相机、鲸鱼斜挎包，鲸尾巴也一起带上了。形象是大家口中「大肥鱼」的二创，三视图在 [photos/](photos/)，宣传片的构建源码和素材在 [video-src/](video-src/)。
 
 ## 📄 许可证与致谢
 

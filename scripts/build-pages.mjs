@@ -88,7 +88,7 @@ fs.writeFileSync(
   <h1>示例路书</h1>
   <p>DSH 里的旅行规划助手做出来的成品：逐日行程、分项预算、天气和地图都在一个网页里，手机也能看。在线演示里的地图是静态图；实际路书的地图能拖动缩放，填上 Google Maps key 还能用 Google 地图。</p>
 ${cards}
-  <footer>源码与安装：<a href="https://github.com/${REPO}">github.com/${REPO}</a></footer>
+  <footer>宣传片：<a href="https://www.bilibili.com/video/BV135HD6HE9W">B 站</a> · 源码与安装：<a href="https://github.com/${REPO}">github.com/${REPO}</a></footer>
 </main>
 </body>
 </html>

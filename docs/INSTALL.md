@@ -22,7 +22,7 @@
 
 ## A. 桌面版「添加插件」/ 插件市场
 
-1. 侧栏 **插件 → 添加插件**，粘贴 `https://github.com/AusertDream/TravelPlanner`，点「安装」。收录进插件市场后，也可以在「设置 → 插件市场」里搜「TravelPlanner」。
+1. 侧栏 **插件 → 添加插件**，粘贴 `https://github.com/AusertDream/TravelPlanner`，点「安装」。收录进插件市场后（审核中：[#6450](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/6450)），也可以在「设置 → 插件市场」里搜「TravelPlanner」。
 2. **完全退出 DSH 再打开**（托盘图标右键退出）。
 3. 新建会话，模式选「旅行规划助手」。
 

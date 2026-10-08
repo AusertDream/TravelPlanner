@@ -11,6 +11,7 @@
   <a href="./package.json"><img src="https://img.shields.io/badge/DSH-%E2%89%A5%200.2.0--rc.2-5B4CF0?style=flat-square" alt="DSH ≥ 0.2.0-rc.2"></a>
   <img src="https://img.shields.io/badge/Node.js-%E2%89%A5%2022-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js ≥ 22">
   <a href="https://github.com/AusertDream/TravelPlanner/actions/workflows/check.yml"><img src="https://github.com/AusertDream/TravelPlanner/actions/workflows/check.yml/badge.svg" alt="check"></a>
+  <a href="https://www.bilibili.com/video/BV135HD6HE9W"><img src="https://img.shields.io/badge/bilibili-video-FB7299?style=flat-square&logo=bilibili&logoColor=white" alt="Video on Bilibili"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-0B7285?style=flat-square" alt="MIT"></a>
 </p>
 
@@ -23,9 +24,13 @@ Tell it "3 days in Chengdu from Shanghai over the National Day holiday, 2 people
 > [!IMPORTANT]
 > It plans and looks things up. It **never books or pays** for anything. Every price is a reference price at query time.
 
+## 🎬 Video
+
 <p align="center">
-  <img src="docs/images/map.jpg" width="88%" alt="Roadbook map: Amap base map, real metro route, numbered stops and per-stop navigation links">
+  <a href="https://www.bilibili.com/video/BV135HD6HE9W" title="Watch the full video on Bilibili"><img src="docs/images/video-preview.webp" width="88%" alt="First 24 seconds of the video: flights and trains compared side by side, three hotel tiers, a metro transfer route drawn on the map, closures and ticket releases checked, then DeepSeek appears in travel gear"></a>
 </p>
+
+<p align="center">A silent preview of the first 24 seconds. <a href="https://www.bilibili.com/video/BV135HD6HE9W"><b>▶ Watch the full video on Bilibili</b></a> (3 minutes, Chinese voice-over and subtitles).</p>
 
 ## Why not just ask a chatbot
 
@@ -41,6 +46,9 @@ Tell it "3 days in Chengdu from Shanghai over the National Day holiday, 2 people
 ## Gallery
 
 <table>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/images/map.jpg" alt="Roadbook map: Amap base map, real metro route, numbered stops and per-stop navigation links"><br><sub><b>Map</b>: real Amap routes with lines, transfers, minutes and fares, plus one-tap navigation for every stop</sub></td>
+  </tr>
   <tr>
     <td width="50%" align="center"><img src="docs/images/hero.png" alt="Roadbook opening"><br><sub><b>Opening</b>: why the trip is laid out this way</sub></td>
     <td width="50%" align="center"><img src="docs/images/day.jpg" alt="Daily timeline"><br><sub><b>Daily timeline</b>: when, where, how and how much, plus a Plan B</sub></td>
@@ -70,7 +78,7 @@ Full example: [👉 open the Chengdu 3-day itinerary online](https://ausertdream
 
 ### Option 2: the plugin market
 
-Once it is listed on [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin), you can search for "TravelPlanner" in the [dsh-market](https://github.com/dsh-market/dsh-market) plugin market (Settings → Plugin Market) and install it in one click. Restart DSH afterwards.
+It has been submitted to [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) and is under review ([#6450](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/6450)). Once it is listed, you can search for "TravelPlanner" in the [dsh-market](https://github.com/dsh-market/dsh-market) plugin market (Settings → Plugin Market) and install it in one click. Restart DSH afterwards. Until then, Option 1 installs exactly the same thing.
 
 ### Option 3: clone and run the installer
 
@@ -145,7 +153,7 @@ node scripts/install.mjs --skills-only --skills-dir ~/.claude/skills  # Claude C
   <img src="photos/big-fat-fish-travel.png" width="86%" alt="Three-view of DeepSeek in travel gear: straw hat, camera, whale crossbody bag and a whale tail">
 </p>
 
-The guide in the promo video is DeepSeek in travel gear: a straw hat, a camera, a little whale crossbody bag, and the tail comes along too. It is fan art of the whale that Chinese users affectionately call 「大肥鱼」 ("big fat fish"). The three-view lives in [photos/](photos/) and the promo video's build scripts and art in [video-src/](video-src/).
+The guide in the [video](https://www.bilibili.com/video/BV135HD6HE9W) is DeepSeek in travel gear: a straw hat, a camera, a little whale crossbody bag, and the tail comes along too. It is fan art of the whale that Chinese users affectionately call 「大肥鱼」 ("big fat fish"). The three-view lives in [photos/](photos/) and the promo video's build scripts and art in [video-src/](video-src/).
 
 ## License
 
