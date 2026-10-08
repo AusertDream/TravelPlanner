@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'KL';src:url(../fonts/ZCOOLKuaiLe-Regular.ttf)}
+@font-face{font-family:'HY';src:url(../fonts/ZCOOLQingKeHuangYou-Regular.ttf)}
+@font-face{font-family:'NS';src:url(../fonts/NotoSansSC-VF.ttf);font-weight:100 900}
+:root{--blue:#4D6BFE;--blue2:#7B93FF;--navy:#1E2A78;--ink:#1B2240;--sky:#EAF2FF;--cream:#FFF8EC;--sun:#FFC94A;--coral:#FF6B5A;--mint:#21B98A;--brick:#A33A2E;--paper:#F7F5F0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
+body{font-family:'NS',sans-serif;color:var(--ink)}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--sky)}
+.scene{position:absolute;inset:0;visibility:hidden;overflow:hidden}
+.abs{position:absolute}
+.bg{position:absolute;left:-64px;top:-36px;width:2048px;height:1152px;object-fit:cover;transform-origin:50% 50%}
+.fill{position:absolute;inset:0}
+.cw{position:absolute;transform-origin:50% 100%}
+.cw img{display:block;width:100%;filter:drop-shadow(0 18px 22px rgba(20,30,90,.28))}
+.card{position:absolute;background:#fff;border:5px solid var(--navy);border-radius:30px;box-shadow:10px 10px 0 var(--navy)}
+.kl{font-family:'KL'}
+.hy{font-family:'HY'}
+.mono{font-family:'DejaVu Sans Mono','NS',monospace}
+.stroke{-webkit-text-stroke:12px var(--navy);paint-order:stroke fill}
+.wstroke{-webkit-text-stroke:14px #fff;paint-order:stroke fill}
+.chip{display:inline-flex;align-items:center;gap:12px;padding:10px 26px;border-radius:999px;background:var(--blue);color:#fff;font-weight:800;font-size:30px;border:4px solid var(--navy);box-shadow:5px 5px 0 var(--navy)}
+.ic{display:inline-flex;align-items:center;justify-content:center}
+.ic svg{width:100%;height:100%}
+.stamp{position:absolute;font-family:'HY';color:var(--coral);border:7px solid var(--coral);border-radius:18px;padding:4px 22px;font-size:58px;background:rgba(255,255,255,.88);white-space:nowrap;transform-origin:50% 50%}
+.tag{position:absolute;display:inline-flex;align-items:center;gap:10px;padding:8px 20px;border-radius:14px;font-weight:800;font-size:28px;white-space:nowrap}
+#subs{position:absolute;left:0;right:0;bottom:46px;text-align:center;z-index:50;pointer-events:none}
+#subs span{display:inline-block;font-weight:800;font-size:52px;color:#fff;letter-spacing:2px;-webkit-text-stroke:8px #16206A;paint-order:stroke fill;text-shadow:0 6px 0 rgba(22,32,106,.35);padding:0 20px}
+#brand{position:absolute;left:44px;top:36px;z-index:40;display:flex;gap:14px;align-items:center}
+#brand .b1{display:flex;align-items:center;gap:10px;background:#fff;border:4px solid var(--navy);border-radius:999px;padding:6px 20px 6px 8px;font-weight:900;font-size:26px;color:var(--navy);box-shadow:4px 4px 0 var(--navy)}
+#brand .dot{width:36px;height:36px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff}
+#brand .b2{font-family:'KL';font-size:36px;color:#fff;-webkit-text-stroke:6px var(--navy);paint-order:stroke fill}
+#wipe{position:absolute;top:0;left:0;width:4000px;height:1080px;z-index:60;pointer-events:none}
+.note{position:absolute;padding:26px 30px 22px;border-radius:10px;font-family:'KL';font-size:42px;color:var(--navy);box-shadow:0 14px 26px rgba(30,42,120,.22);white-space:nowrap;transform-origin:50% 50%}
+.note:before{content:'';position:absolute;left:50%;top:-14px;width:110px;height:30px;margin-left:-55px;background:rgba(255,255,255,.6);transform:rotate(-3deg);border-radius:3px}
+.row{display:flex;align-items:center}
+.col{display:flex;flex-direction:column}
+.bubble{position:absolute;border-radius:28px;padding:22px 30px;font-size:32px;line-height:1.5}
+.laptop{position:absolute}
+.scr{position:absolute;overflow:hidden;background:#fff}
+.scr img{position:absolute;left:0;top:0;width:100%}
+.term{position:absolute;background:#0F1530;border:5px solid var(--navy);border-radius:24px;box-shadow:10px 10px 0 rgba(30,42,120,.9);overflow:hidden}
+.term .bar{height:58px;background:#1C2550;display:flex;align-items:center;gap:12px;padding:0 22px}
+.term .bar i{width:18px;height:18px;border-radius:50%;display:block}
+.term .body{padding:26px 34px;font-family:'DejaVu Sans Mono','NS',monospace;font-size:28px;line-height:1.75;color:#DDE5FF;white-space:pre}
+.ok{color:#6EF0B8}.bad{color:#FF8E7E}.dim{color:#8A97C9}.hl{color:#FFD86B}
+</style></head>
+<body><div id="stage"></div>
+<script src="../node_modules/gsap/dist/gsap.min.js"></script>
+<script src="timeline.js"></script>
+<script src="icons.js"></script>
+<script src="main.js"></script>
+</body></html>

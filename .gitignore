@@ -21,3 +21,12 @@ Thumbs.db
 
 # ── 个人临时目录 ──
 temp/
+
+# ── 宣传片发布物：成片、封面、字幕、发布文案（成片 170 MB，超过 GitHub 单文件上限）。构建源码在 video-src/ ──
+video/
+# 视频源码目录里也不收音视频文件
+video-src/**/*.mp4
+video-src/**/*.wav
+video-src/**/*.mp3
+video-src/**/*.m4a
+video-src/**/*.f32

@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:'KL';src:url(../fonts/ZCOOLKuaiLe-Regular.ttf)}
+@font-face{font-family:'HY';src:url(../fonts/ZCOOLQingKeHuangYou-Regular.ttf)}
+@font-face{font-family:'NS';src:url(../fonts/NotoSansSC-VF.ttf);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:var(--w);height:1080px;overflow:hidden;font-family:'NS'}
+#c{position:relative;width:var(--w);height:1080px;overflow:hidden}
+.bg{position:absolute;top:0;height:1080px;width:1920px;object-fit:cover}
+.sh{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.8) 0%,rgba(255,255,255,.5) 36%,rgba(255,255,255,0) 60%)}
+.blk{position:absolute;left:var(--lx);top:80px}
+.chip{display:inline-flex;align-items:center;padding:10px 28px;border-radius:999px;background:#4D6BFE;color:#fff;font-weight:900;font-size:34px;border:5px solid #1E2A78;box-shadow:6px 6px 0 #1E2A78}
+.t1{font-family:'KL';font-size:var(--f1);color:#1E2A78;-webkit-text-stroke:16px #fff;paint-order:stroke fill;line-height:1.1;margin-top:24px}
+.t2{font-family:'HY';font-size:var(--f2);color:#4D6BFE;-webkit-text-stroke:18px #fff;paint-order:stroke fill;text-shadow:14px 14px 0 #1E2A78;line-height:.95;transform:rotate(-3deg);transform-origin:0 50%}
+.tag{display:inline-block;margin-top:36px;background:#1E2A78;color:#FFD86B;font-family:'KL';font-size:var(--f3);padding:14px 34px;border-radius:22px;box-shadow:8px 8px 0 #4D6BFE}
+.row{display:flex;gap:16px;margin-top:28px;flex-wrap:wrap;max-width:var(--rw)}
+.b{background:#fff;border:5px solid #1E2A78;border-radius:16px;padding:6px 20px;font-weight:900;font-size:34px;color:#1E2A78;box-shadow:5px 5px 0 #1E2A78}
+.st{position:absolute;width:220px;height:220px;border-radius:50%;background:#FFC94A;border:7px solid #1E2A78;box-shadow:8px 8px 0 #1E2A78;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(12deg);font-family:'HY';color:#1E2A78}
+</style></head><body><div id="c"><img class="bg" id="bg" src="img/kv.jpg"><div class="sh"></div>
+<div class="blk"><div class="chip">TravelPlanner · DeepSeek Harness</div><div class="t1">DeepSeek 旅行规划助手</div><div class="t2">说走就走！</div>
+<div class="tag">一句话 → 一份能出发的路书</div>
+<div class="row"><span class="b">12306 余票</span><span class="b">飞猪 · 途牛比价</span><span class="b">高德真实路线</span><span class="b">离线 HTML 路书</span></div></div>
+<div class="st" id="st"><div style="font-size:64px;line-height:1">开源</div><div style="font-size:44px;line-height:1.1">免费用</div></div>
+</div><script>
+const w=+(new URLSearchParams(location.search).get('w')||1920), r=document.documentElement.style, st=document.getElementById('st'), bg=document.getElementById('bg');
+r.setProperty('--w',w+'px');
+if(w<1900){ r.setProperty('--lx','56px'); r.setProperty('--rw','760px'); r.setProperty('--f1','68px'); r.setProperty('--f2','164px'); r.setProperty('--f3','50px'); bg.style.left='-470px'; st.style.right='40px'; st.style.top='40px'; }
+else { r.setProperty('--lx','110px'); r.setProperty('--rw','900px'); r.setProperty('--f1','92px'); r.setProperty('--f2','222px'); r.setProperty('--f3','62px'); bg.style.left='0'; st.style.right='110px'; st.style.top='60px'; }
+</script></body></html>
